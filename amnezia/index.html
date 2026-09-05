@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Открытие AmneziaVPN</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; max-width: 720px; margin: 40px auto; padding: 20px; text-align: center; }
+    button { font-size: 20px; padding: 14px 22px; border-radius: 12px; cursor: pointer; }
+    p { color: #666; }
+  </style>
+</head>
+<body>
+  <h2>Открываю AmneziaVPN…</h2>
+  <p>Если приложение не открылось автоматически, нажми кнопку.</p>
+  <button id="open">Открыть AmneziaVPN</button>
+
+  <script>
+    let vpnLink = "";
+
+    try {
+      vpnLink = decodeURIComponent(location.hash.slice(1));
+    } catch (_) {}
+
+    const button = document.getElementById("open");
+
+    if (!vpnLink.startsWith("vpn://")) {
+      document.querySelector("h2").textContent = "Некорректная ссылка";
+      document.querySelector("p").textContent = "VPN-конфигурация не найдена.";
+      button.style.display = "none";
+    } else {
+      button.addEventListener("click", () => {
+        location.href = vpnLink;
+      });
+
+      setTimeout(() => {
+        location.href = vpnLink;
+      }, 250);
+    }
+  </script>
+</body>
+</html>
